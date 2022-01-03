@@ -1,0 +1,20 @@
+'use strict';
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('Products',
+    [
+      {
+        id: 1,
+        name: 'Skol Lata 250ml',
+        price: 2.20,
+        url_image: 'http://localhost:3001/images/skol_lata_350ml.jpg',
+      },
+    ],
+    {},
+    );
+  },
+  down: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('Products', null, {});
+  },
+};
