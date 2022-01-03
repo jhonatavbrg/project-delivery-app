@@ -15,14 +15,14 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
   
-  User.associate = function(models) {
+  User.associate = (models) => {
     User.hasMany(models.Sales, {
       foreignKey: 'seller_id',
-      as: 'sales',
+      as: 'sale',
     });
     User.hasMany(models.Sales, {
       foreignKey: 'user_id',
-      as: 'sales',
+      as: 'sale',
     });
   }
 
