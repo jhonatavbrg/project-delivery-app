@@ -7,9 +7,9 @@ function Register() {
   const [register, setRegister] = useState({ name: '', email: '', password: '' });
   useEffect(() => {
     const validationChange = () => {
-      const MAX_CHAR_NAME = 12;
+      const MIN_CHAR_NAME = 12;
       const MIN_CHAR_PASSWORD = 6;
-      const { error } = Joi.object({ name: Joi.string().max(MAX_CHAR_NAME).required(),
+      const { error } = Joi.object({ name: Joi.string().min(MIN_CHAR_NAME).required(),
         email: Joi.string().email({ tlds: { allow: false } }).required(),
         password: Joi.string().min(MIN_CHAR_PASSWORD).required() })
         .validate(register);

@@ -1,21 +1,75 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
+import Joi from 'joi';
 
-function login() {
+function Login() {
+  const [validate, setValidate] = useState(false);
+  const [payload, setPayload] = useState({ email: '', password: '' });
+
+  function onChange({ target }) {
+    const { name, value } = target;
+    setPayload({ ...payload, [name]: value });
+  }
+
+  useEffect(() => {
+    const validateLogin = () => {
+      const minLength = 6;
+      const { error } = Joi.object({ email: Joi.string()
+        .email({ tlds: { allow: false } }),
+      password: Joi.string().min(minLength) })
+        .validate(payload);
+      if (error) {
+        setValidate(true);
+      } else {
+        setValidate(false);
+      }
+    };
+    validateLogin();
+  }, [payload]);
+
   return (
     <div className="App">
-      <span className="logo">FOI!!!</span>
-      <Link to="/register">
+      <form>
+        <label htmlFor="input-email">
+          <p>Login</p>
+          <input
+            name="email"
+            onChange={ onChange }
+            id="input-email"
+            data-testid="common_login__input-email"
+            type="email"
+          />
+        </label>
+        <label htmlFor="input-password">
+          <p>Senha</p>
+          <input
+            name="password"
+            onChange={ onChange }
+            id="input-password"
+            data-testid="common_login__input-password"
+            type="password"
+          />
+        </label>
         <button
+          disabled={ validate }
+          data-testid="common_login__button-login"
           type="button"
-          data-testid="common_login__button-register"
         >
-          Ainda não tenho conta
+          Login
         </button>
-      </Link>
+        <Link to="/register">
+          <button
+            type="button"
+            data-testid="common_login__button-register"
+          >
+            Ainda não tenho conta
+          </button>
+        </Link>
+      </form>
+      { validate ? <p data-testid="common_login__element-invalid-email">Erro!</p> : null }
     </div>
   );
 }
 
-export default login;
+export default Login;

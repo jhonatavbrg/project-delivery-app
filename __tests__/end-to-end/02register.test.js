@@ -49,7 +49,7 @@ describe(requirement(7), () => {
   });
 });
 
-describe.only(requirement(8), () => {
+describe(requirement(8), () => {
   const people = [
     {
       ...newUser({
