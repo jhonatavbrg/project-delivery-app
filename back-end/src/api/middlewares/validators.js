@@ -6,7 +6,7 @@ const validateLoginPayload = async (req, res, next) => {
     password: Joi.string().required(),
   }).validate(req.body);
 
-  if(error) {
+  if (error) {
     return res.status(400).json({
       status: 400,
       error: error.details[0].message,
@@ -14,8 +14,8 @@ const validateLoginPayload = async (req, res, next) => {
   }
 
   return next();
-}
+};
 
 module.exports = {
-  validateLoginPayload
+  validateLoginPayload,
 };
