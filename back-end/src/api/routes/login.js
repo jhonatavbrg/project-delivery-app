@@ -1,5 +1,8 @@
-// const router = require('express').Router();
+const router = require('express').Router();
+const { validateLoginPayload } = require('../middlewares/validators');
 
-// const loginController = require('../controllers/loginController');
+const loginController = require('../controllers/loginController');
 
-// router.post('/', loginController.login);
+router.post('/', validateLoginPayload, loginController.login);
+
+module.exports = router;
