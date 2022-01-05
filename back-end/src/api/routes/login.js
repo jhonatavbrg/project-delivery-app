@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { validateLoginPayload } = require('../../middlewares/validators');
+const { validateLoginPayload } = require('../middlewares/validators');
 
 const loginController = require('../controllers/loginController');
 

@@ -2,14 +2,22 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Joi from 'joi';
+import postLogin from '../services/login';
 
 function Login() {
   const [validate, setValidate] = useState(false);
+  const [loginError, setLoginError] = useState(false);
   const [payload, setPayload] = useState({ email: '', password: '' });
 
   function onChange({ target }) {
     const { name, value } = target;
     setPayload({ ...payload, [name]: value });
+    console.log(setLoginError);
+  }
+
+  async function sendLogin() {
+    // const token = await
+    postLogin(payload);
   }
 
   useEffect(() => {
@@ -55,6 +63,7 @@ function Login() {
           disabled={ validate }
           data-testid="common_login__button-login"
           type="button"
+          onClick={ sendLogin }
         >
           Login
         </button>
@@ -67,7 +76,11 @@ function Login() {
           </button>
         </Link>
       </form>
-      { validate ? <p data-testid="common_login__element-invalid-email">Erro!</p> : null }
+      {
+        loginError
+          ? <p data-testid="common_login__element-invalid-email">Erro!</p>
+          : null
+      }
     </div>
   );
 }
