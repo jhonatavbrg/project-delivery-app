@@ -4,8 +4,10 @@ import axios from 'axios';
 dotenv.config();
 
 export default function postLogin({ email, password }) {
-  return axios.post(`${process.env.API_URL}/login`, {
+  return axios.post(`${process.env.REACT_APP_API_URL}/login`, {
     email,
     password,
-  }).then((response) => console.log(response));
+  })
+    .then(({ data }) => data.token)
+    .catch((err) => err.toJSON());
 }

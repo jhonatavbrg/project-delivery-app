@@ -16,8 +16,13 @@ function Login() {
   }
 
   async function sendLogin() {
-    // const token = await
-    postLogin(payload);
+    const token = await postLogin(payload);
+    console.log(token);
+    if (token.message) {
+      setLoginError(true);
+    } else {
+      setLoginError(false);
+    }
   }
 
   useEffect(() => {

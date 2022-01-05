@@ -2,8 +2,9 @@ const md5 = require('md5');
 const { user } = require('../../database/models');
 const { createToken } = require('../../api/middlewares/auth');
 
-const userLogin = async ({ email, password }) => {
-  const loginUser = await user.findOne({ where: { email, password: md5(password)}});
+const login = async ({ email, password }) => {
+  const encodedPassword = md5(password);
+  const loginUser = await user.findOne({ where: { email, password: encodedPassword}});
 
   if(loginUser) {
     const token = createToken(loginUser);
@@ -12,5 +13,5 @@ const userLogin = async ({ email, password }) => {
 }
 
 module.exports = { 
-  userLogin
+  login
 }
