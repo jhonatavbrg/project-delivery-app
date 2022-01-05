@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Joi from 'joi';
@@ -57,12 +58,14 @@ function Login() {
         >
           Login
         </button>
-        <button
-          data-testid="common_login__button-register"
-          type="button"
-        >
-          Ainda não tenho conta
-        </button>
+        <Link to="/register">
+          <button
+            type="button"
+            data-testid="common_login__button-register"
+          >
+            Ainda não tenho conta
+          </button>
+        </Link>
       </form>
       { validate ? <p data-testid="common_login__element-invalid-email">Erro!</p> : null }
     </div>
