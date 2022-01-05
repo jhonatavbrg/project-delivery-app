@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import Joi from 'joi';
 import postLogin from '../services/login';
+import { setLSToken } from '../helpers/LS';
 
 function Login() {
   const [validate, setValidate] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [payload, setPayload] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
 
   function onChange({ target }) {
     const { name, value } = target;
@@ -22,6 +24,8 @@ function Login() {
       setLoginError(true);
     } else {
       setLoginError(false);
+      setLSToken(token);
+      navigate('/customer/products', { replace: true });
     }
   }
 
