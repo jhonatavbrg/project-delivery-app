@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getSellers } from '../helpers/LS';
+import NavBar from '../componets/header';
 
 function Checkout() {
   const [sellers, setSellers] = useState([]);
@@ -20,6 +21,7 @@ function Checkout() {
 
   return (
     <div>
+      <NavBar />
       <p>Finalizar pedido</p>
       <ol>
         <li>
