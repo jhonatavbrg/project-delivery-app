@@ -3,7 +3,7 @@ import axios from 'axios';
 
 dotenv.config();
 
-export default function postRegister({ email, password, name, role = 'ustomer' }) {
+export default function postRegister({ email, password, name, role = 'customer' }) {
   return axios.post('http://localhost:3001/register', {
     email,
     password,
