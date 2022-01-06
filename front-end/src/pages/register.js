@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Joi from 'joi';
 import postRegister from '../services/register';
+import postLogin from '../services/login';
+import { setLSToken } from '../helpers/LS';
+
 import '../App.css';
 
 function Register() {
@@ -12,6 +16,7 @@ function Register() {
     role: 'customer',
   });
   const [registerError, setRegisterError] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const validationChange = () => {
@@ -49,11 +54,12 @@ function Register() {
     const message = await postRegister(register);
     console.log(message);
     if (message === 'Usuário criado com sucesso!') {
-      setRegisterError(true);
-      postLogin(register.email);
-    } else {
       setRegisterError(false);
+      const token = await postLogin(register);
+      setLSToken(token);
       navigate('/customer/products', { replace: true });
+    } else {
+      setRegisterError(true);
     }
   }
 
