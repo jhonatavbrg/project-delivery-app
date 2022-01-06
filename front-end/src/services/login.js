@@ -4,7 +4,7 @@ import axios from 'axios';
 dotenv.config();
 
 export default function postLogin({ email, password }) {
-  return axios.post(`${process.env.REACT_APP_API_URL}/login`, {
+  return axios.post('http://localhost:3001/login', {
     email,
     password,
   })
