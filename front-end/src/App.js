@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Login from './pages/login';
 import Register from './pages/register';
-import Customer from './pages/customer';
+import Customer from './pages/produts';
 import Orders from './pages/orders';
 import './App.css';
 // import rockGlass from './images/rockGlass.svg';
