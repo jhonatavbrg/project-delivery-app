@@ -9,7 +9,7 @@ const register = rescue(async (req, res) => {
 
   if (checkUser) return res.status(409).json({ message: 'Usuário já existe.' });
   
-  await userRegister({ name, email, password, role});
+  await userRegister({ name, email, password, role });
 
   return res.status(201).json({ message: 'Usuário criado com sucesso!' });
 });
