@@ -4,7 +4,7 @@ import axios from 'axios';
 dotenv.config();
 
 export default function postRegister({ email, password, name, role = 'ustomer' }) {
-  return axios.post(`${process.env.REACT_APP_API_URL}/register`, {
+  return axios.post('http://localhost:3001/register', {
     email,
     password,
     name,
