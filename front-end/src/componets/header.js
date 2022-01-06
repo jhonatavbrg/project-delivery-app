@@ -1,20 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
   return (
     <div>
-      <button
-        type="button"
+      <Link
+        to="/customer/products"
         data-testid="customer_products__element-navbar-link-products"
       >
         Produtos
-      </button>
-      <button
-        type="button"
+      </Link>
+      <Link
+        to="/customer/orders/:id"
         data-testid="customer_products__element-navbar-link-orders"
       >
         Meus pedidos
-      </button>
+      </Link>
       <button
         type="button"
         data-testid="customer_products__element-navbar-user-full-name"

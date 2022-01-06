@@ -1,13 +1,13 @@
 import React from 'react';
 import NavBar from '../componets/header';
 
-function Customer() {
+function Orders() {
   return (
     <div>
       <NavBar />
-      <p>Sou a tela de clientes - produtos</p>
+      Essa é a Pagina de Orders
     </div>
   );
 }
 
-export default Customer;
+export default Orders;
