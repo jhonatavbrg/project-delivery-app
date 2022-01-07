@@ -5,7 +5,7 @@ import postRegister from '../services/register';
 import postLogin from '../services/login';
 import { setLSToken } from '../helpers/LS';
 
-import '../App.css';
+// import '../App.css';
 
 function Register() {
   const [validate, setValidate] = useState(false);

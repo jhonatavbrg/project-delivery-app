@@ -4,7 +4,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import Customer from './pages/produts';
 import Orders from './pages/orders';
-import './App.css';
+// import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 
 function App() {

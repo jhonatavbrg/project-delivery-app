@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { getImages } from '../services/products';
+import '../App.css';
 
 function Cards({ product }) {
   // const [images, setImages] = useState();
@@ -23,11 +24,13 @@ function Cards({ product }) {
       <p data-testid={ `customer_products__element-card-price-${product.id}` }>
         {product.price}
       </p>
-      <img
-        data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-        src={ product.url_image }
-        alt={ product.name }
-      />
+      <div className="img-cards">
+        <img
+          data-testid={ `customer_products__img-card-bg-image-${product.id}` }
+          src={ product.url_image }
+          alt={ product.name }
+        />
+      </div>
       <button
         data-testid={ `customer_products__button-card-add-item-${product.id}` }
         type="button"

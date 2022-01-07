@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import axios from 'axios';
+import '../App.css';
 
 dotenv.config();
 
