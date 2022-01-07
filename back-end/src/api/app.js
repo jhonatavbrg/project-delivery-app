@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const loginRouter = require('./routes/login');
+const userRouter = require('./routes/user');
 const products = require('./routes/products');
 const images = require('./routes/images');
 
@@ -18,6 +19,8 @@ app.use('/login', loginRouter);
 app.use('/customer', products);
 
 app.use('/images', images);
+
+app.use('/user', userRouter);
 
 app.use(express.static(`${__dirname}/../public/images`)); 
 
