@@ -8,6 +8,6 @@ export default function postLogin({ email, password }) {
     email,
     password,
   })
-    .then(({ data }) => data.token)
+    .then(({ data }) => data.user)
     .catch((err) => err.toJSON());
 }

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+// import '../App.css';
 import Joi from 'joi';
 import postLogin from '../services/login';
 import { setLSToken } from '../helpers/LS';

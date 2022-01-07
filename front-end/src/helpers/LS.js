@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-export function setLSToken(token) {
-  localStorage.setItem('token', JSON.stringify(token));
+export function setLSToken(user) {
+  localStorage.setItem('user', JSON.stringify(user));
 }
 
 export function getLSToken() {
-  return JSON.parse(localStorage.getItem('token'));
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user) {
+    return user;
+  }
+  return { };
 }
 
 export async function getSellers() {

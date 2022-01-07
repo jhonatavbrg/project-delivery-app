@@ -8,7 +8,8 @@ const login = async ({ email, password }) => {
 
   if (loginUser) {
     const token = createToken(loginUser);
-    return token;
+    const userInfo = { token, name: loginUser.name, email: loginUser.email, role: loginUser.role };
+    return userInfo;
   }
 };
 

@@ -5,7 +5,7 @@ import Register from './pages/register';
 import Checkout from './pages/checkout';
 import Customer from './pages/produts';
 import Orders from './pages/orders';
-import './App.css';
+// import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 
 function App() {
