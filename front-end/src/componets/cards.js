@@ -4,15 +4,7 @@ import PropTypes from 'prop-types';
 import '../App.css';
 
 function Cards({ product }) {
-  // const [images, setImages] = useState();
-
-  // useEffect(() => {
-  //   const getAlImages = async () => {
-  //     const allImages = await getImages();
-  //     setImages(allImages);
-  //   };
-  //   getAlImages();
-  // }, []);
+  const changePrice = (price) => price.toString().replace('.', ',');
 
   return (
     <div>
@@ -22,7 +14,7 @@ function Cards({ product }) {
         {product.name}
       </p>
       <p data-testid={ `customer_products__element-card-price-${product.id}` }>
-        {product.price}
+        {changePrice(product.price)}
       </p>
       <div className="img-cards">
         <img
@@ -40,6 +32,7 @@ function Cards({ product }) {
       <input
         data-testid={ `customer_products__input-card-quantity-${product.id}` }
         type="number"
+        value="0"
       />
       <button
         data-testid={ `customer_products__button-card-rm-item-${product.id}` }
