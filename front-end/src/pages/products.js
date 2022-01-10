@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Cards from '../componets/cards';
 import NavBar from '../componets/header';
 import getProducts from '../services/products';
@@ -8,7 +8,7 @@ import CustomerContext from '../context/customerContext';
 
 function Customer() {
   const navigate = useNavigate();
-  const { totalPrice } = useContext(CustomerContext);
+  const { totalPrice, setTotalPrice, cartProducts } = useContext(CustomerContext);
 
   const [products, setProducts] = useState([{
     name: '',
@@ -30,6 +30,14 @@ function Customer() {
     }
   }, [navigate]);
 
+  useEffect(() => {
+    console.log(cartProducts);
+    const total = cartProducts.reduce(
+      (acc, { price, quantity }) => acc + (Number(price) * quantity), 0,
+    );
+    setTotalPrice(total.toFixed(2));
+  }, [cartProducts, setTotalPrice]);
+
   return (
     <div>
       <NavBar />
@@ -38,7 +46,16 @@ function Customer() {
           <Cards product={ product } key={ index } />
         ))}
       </div>
-      <Link to="/customer/checkout">{`Ver carrinho: R$${totalPrice}` }</Link>
+      <button
+        type="button"
+        data-testid="customer_products__button-cart"
+        disabled={ cartProducts.length === 0 }
+        onClick={ () => navigate('/customer/checkout') }
+      >
+        <p data-testid="customer_products__checkout-bottom-value">
+          { `Ver carrinho: R$${totalPrice.toString().replace('.', ',')}` }
+        </p>
+      </button>
     </div>
   );
 }

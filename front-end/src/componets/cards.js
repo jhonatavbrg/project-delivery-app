@@ -1,61 +1,60 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import CustomerContext from '../context/customerContext';
-// import { getImages } from '../services/products';
 import '../App.css';
 
 function Cards({ product }) {
-  const [productsContext] = useState(product);
-
   const changePrice = (price) => price.toString().replace('.', ',');
-  const { products,
-    setProducts,
-    setTotalPrice } = useContext(CustomerContext);
+  const { cartProducts, setCartProducts } = useContext(CustomerContext);
 
   const [quantity, setQuantity] = useState(0);
 
-  function updatedCartProducts() {
-
+  function updatedCartProducts(cartQuantity) {
+    const cartProduct = cartProducts.find(({ name }) => name === product.name);
+    if (!cartProduct) {
+      setCartProducts([{ ...product, quantity: cartQuantity }, ...cartProducts]);
+    } else {
+      const updatedProducts = cartProducts.map((updatedProduct) => {
+        console.log(updatedProduct.name, product.name);
+        if (updatedProduct.name === product.name) {
+          return { ...updatedProduct, quantity: cartQuantity };
+        }
+        return updatedProduct;
+      });
+      setCartProducts(updatedProducts);
+    }
   }
 
-  // function countTotalPrice() {
-  //   const cartProduct = products.find(({ name }) => name !== productsContext.name);
-  //   console.log(cartProduct);
-  //   if (quantity > 0 && !cartProduct) {
-  //     setProducts([{ ...productsContext, quantity }, ...products]);
-  //   } else if (quantity > 0 && cartProduct.quantity !== quantity) {
-  //     const updatedProducts = products.map((updatedProduct) => {
-  //       if (updatedProduct.name === productsContext.name) {
-  //         return { ...updatedProduct, quantity };
-  //       }
-  //       return updatedProduct;
-  //     });
-  //     setProducts(updatedProducts);
-  //   } else if (quantity === 0) {
-  //     const updatedProducts = products
-  //       .filter((updatedProduct) => updatedProduct.name !== productsContext.name);
-  //     setProducts(updatedProducts);
-  //   }
+  function removeCartProduct() {
+    const updatedProducts = cartProducts.filter(({ name }) => name !== product.name);
+    setCartProducts(updatedProducts);
+  }
 
-  //   const total = products.reduce(
-  //     (acc, { price }) => acc + (Number(price) * quantity), 0,
-  //   );
-  //   setTotalPrice(total);
-  // }
-
-  const add = () => {
+  const addQuantity = () => {
     setQuantity(quantity + 1);
-    countTotalPrice();
+    updatedCartProducts(quantity + 1);
   };
 
-  const remove = () => {
+  const removeQuantity = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
-      countTotalPrice();
+      if (quantity - 1 === 0) {
+        removeCartProduct();
+      } else {
+        updatedCartProducts(quantity - 1);
+      }
     }
   };
 
-  const handleChange = ({ target }) => setQuantity(target.value);
+  const handleChange = ({ target }) => {
+    console.log(typeof target.value);
+    setQuantity(target.value);
+    if (target.value === 0) {
+      removeCartProduct();
+    } else {
+      updatedCartProducts(target.value);
+    }
+  };
 
   return (
     <div>
@@ -77,7 +76,7 @@ function Cards({ product }) {
       <button
         data-testid={ `customer_products__button-card-add-item-${product.id}` }
         type="button"
-        onClick={ add }
+        onClick={ addQuantity }
       >
         +
       </button>
@@ -91,7 +90,7 @@ function Cards({ product }) {
       <button
         data-testid={ `customer_products__button-card-rm-item-${product.id}` }
         type="button"
-        onClick={ remove }
+        onClick={ removeQuantity }
       >
         -
       </button>
