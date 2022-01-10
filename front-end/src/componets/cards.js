@@ -1,18 +1,60 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-// import { getImages } from '../services/products';
+import CustomerContext from '../context/customerContext';
 import '../App.css';
 
 function Cards({ product }) {
-  // const [images, setImages] = useState();
+  const changePrice = (price) => price.toString().replace('.', ',');
+  const { cartProducts, setCartProducts } = useContext(CustomerContext);
 
-  // useEffect(() => {
-  //   const getAlImages = async () => {
-  //     const allImages = await getImages();
-  //     setImages(allImages);
-  //   };
-  //   getAlImages();
-  // }, []);
+  const [quantity, setQuantity] = useState(0);
+
+  function updatedCartProducts(cartQuantity) {
+    const cartProduct = cartProducts.find(({ name }) => name === product.name);
+    if (!cartProduct) {
+      setCartProducts([{ ...product, quantity: cartQuantity }, ...cartProducts]);
+    } else {
+      const updatedProducts = cartProducts.map((updatedProduct) => {
+        console.log(updatedProduct.name, product.name);
+        if (updatedProduct.name === product.name) {
+          return { ...updatedProduct, quantity: cartQuantity };
+        }
+        return updatedProduct;
+      });
+      setCartProducts(updatedProducts);
+    }
+  }
+
+  function removeCartProduct() {
+    const updatedProducts = cartProducts.filter(({ name }) => name !== product.name);
+    setCartProducts(updatedProducts);
+  }
+
+  const addQuantity = () => {
+    setQuantity(quantity + 1);
+    updatedCartProducts(quantity + 1);
+  };
+
+  const removeQuantity = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+      if (quantity - 1 === 0) {
+        removeCartProduct();
+      } else {
+        updatedCartProducts(quantity - 1);
+      }
+    }
+  };
+
+  const handleChange = ({ target }) => {
+    console.log(typeof target.value);
+    setQuantity(target.value);
+    if (target.value === 0) {
+      removeCartProduct();
+    } else {
+      updatedCartProducts(target.value);
+    }
+  };
 
   return (
     <div>
@@ -22,7 +64,7 @@ function Cards({ product }) {
         {product.name}
       </p>
       <p data-testid={ `customer_products__element-card-price-${product.id}` }>
-        {product.price}
+        {changePrice(product.price)}
       </p>
       <div className="img-cards">
         <img
@@ -34,16 +76,21 @@ function Cards({ product }) {
       <button
         data-testid={ `customer_products__button-card-add-item-${product.id}` }
         type="button"
+        onClick={ addQuantity }
       >
         +
       </button>
       <input
         data-testid={ `customer_products__input-card-quantity-${product.id}` }
         type="number"
+        min={ 0 }
+        onChange={ handleChange }
+        value={ quantity }
       />
       <button
         data-testid={ `customer_products__button-card-rm-item-${product.id}` }
         type="button"
+        onClick={ removeQuantity }
       >
         -
       </button>
@@ -54,7 +101,7 @@ function Cards({ product }) {
 Cards.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     url_image: PropTypes.string,
     id: PropTypes.number,
   }).isRequired,

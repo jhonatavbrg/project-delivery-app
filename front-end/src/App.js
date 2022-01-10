@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Login from './pages/login';
 import Register from './pages/register';
 import Checkout from './pages/checkout';
-import Customer from './pages/produts';
+import Customer from './pages/products';
 import Orders from './pages/orders';
 // import './App.css';
 // import rockGlass from './images/rockGlass.svg';
