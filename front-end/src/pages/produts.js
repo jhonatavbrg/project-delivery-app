@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Cards from '../componets/cards';
 import NavBar from '../componets/header';
 import getProducts from '../services/products';
 import verifyToken from '../helpers/auth';
+import CustomerContext from '../context/customerContext';
 
 function Customer() {
   const navigate = useNavigate();
+  const { totalPrice } = useContext(CustomerContext);
 
   const [products, setProducts] = useState([{
     name: '',
@@ -36,6 +38,7 @@ function Customer() {
           <Cards product={ product } key={ index } />
         ))}
       </div>
+      <Link to="/customer/checkout">{`Ver carrinho: R$${totalPrice}` }</Link>
     </div>
   );
 }
