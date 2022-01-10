@@ -8,7 +8,7 @@ import CustomerContext from '../context/customerContext';
 
 function Customer() {
   const navigate = useNavigate();
-  const { totalPrice } = useContext(CustomerContext);
+  const { totalPrice, setTotalPrice, cartProducts } = useContext(CustomerContext);
 
   const [products, setProducts] = useState([{
     name: '',
@@ -30,12 +30,20 @@ function Customer() {
     }
   }, [navigate]);
 
+  useEffect(() => {
+    console.log(cartProducts);
+    const total = cartProducts.reduce(
+      (acc, { price, quantity }) => acc + (Number(price) * quantity), 0,
+    );
+    setTotalPrice(total.toFixed(2));
+  }, [cartProducts, setTotalPrice]);
+
   return (
     <div>
       <NavBar />
       <div>
         {products.map((product, index) => (
-          <Cards product={ product } key={ index } />
+          <Cards total={ totalPrice } product={ product } key={ index } />
         ))}
       </div>
       <Link to="/customer/checkout">{`Ver carrinho: R$${totalPrice}` }</Link>

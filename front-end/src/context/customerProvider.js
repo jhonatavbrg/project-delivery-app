@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import CustomerContext from './customerContext';
 
 export default function CustomerProvider({ children }) {
-  const [products, setProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   const context = {
-    products,
-    setProducts,
+    cartProducts,
+    setCartProducts,
     totalPrice,
     setTotalPrice,
   };
