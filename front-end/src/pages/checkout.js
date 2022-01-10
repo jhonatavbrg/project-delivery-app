@@ -5,11 +5,37 @@ import NavBar from '../componets/header';
 function Checkout() {
   const [sellers, setSellers] = useState([]);
   const [address, setAddress] = useState({ address: '', number: 0 });
+  const [productsArray, setProductsArray] = useState([]);
+  const products = [{
+    name: 'Cerveja',
+    quantity: 2,
+    unity: 1.50,
+    subTotal: 3.00,
+  },
+  {
+    name: 'Salgadinho',
+    quantity: 4,
+    unity: 2.10,
+    subTotal: 4.40,
+  },
+  {
+    name: 'Refrigerante',
+    quantity: 1,
+    unity: 3.30,
+    subTotal: 3.30,
+  }];
 
   useEffect(() => {
     getSellers()
       .then((response) => setSellers(typeof response === 'string' ? [] : response));
   }, [sellers]);
+
+  // useEffect(() => {
+  //   const totalSum = () => ;
+
+  //   const totalProducts = totalSum();
+  //   setProductsArray(totalProducts);
+  // }, [products]);
 
   const getInformation = ({ target: { name, value } }) => {
     if (name === 'address') {
@@ -32,7 +58,12 @@ function Checkout() {
           <span>Sub-total</span>
           <span>Remover item</span>
         </li>
+        { products.map((product, index) => (
+          <li key={ index }>
+            { Object.values(product) }
+          </li>))}
       </ol>
+      <p>Total: R$</p>
       <form>
         <p>Detalhes e Endereço para Entrega</p>
         <p>P. Vendedora responsável</p>
