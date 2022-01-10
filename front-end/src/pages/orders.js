@@ -1,11 +1,12 @@
 import React from 'react';
 import NavBar from '../componets/header';
+import OrderDetails from '../componets/orderDetails';
 
 function Orders() {
   return (
     <div>
       <NavBar />
-      Essa é a Pagina de Orders
+      <OrderDetails />
     </div>
   );
 }
