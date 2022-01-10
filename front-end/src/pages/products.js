@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Cards from '../componets/cards';
 import NavBar from '../componets/header';
 import getProducts from '../services/products';
@@ -43,10 +43,19 @@ function Customer() {
       <NavBar />
       <div>
         {products.map((product, index) => (
-          <Cards total={ totalPrice } product={ product } key={ index } />
+          <Cards product={ product } key={ index } />
         ))}
       </div>
-      <Link to="/customer/checkout">{`Ver carrinho: R$${totalPrice}` }</Link>
+      <button
+        type="button"
+        data-testid="customer_products__button-cart"
+        disabled={ cartProducts.length === 0 }
+        onClick={ () => navigate('/customer/checkout') }
+      >
+        <p data-testid="customer_products__checkout-bottom-value">
+          { `Ver carrinho: R$${totalPrice.toString().replace('.', ',')}` }
+        </p>
+      </button>
     </div>
   );
 }

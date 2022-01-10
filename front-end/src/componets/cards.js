@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import CustomerContext from '../context/customerContext';
-// import { getImages } from '../services/products';
 import '../App.css';
 
-function Cards({ product, total }) {
+function Cards({ product }) {
   const changePrice = (price) => price.toString().replace('.', ',');
   const { cartProducts, setCartProducts } = useContext(CustomerContext);
 
@@ -47,7 +46,15 @@ function Cards({ product, total }) {
     }
   };
 
-  const handleChange = ({ target }) => setQuantity(target.value);
+  const handleChange = ({ target }) => {
+    console.log(typeof target.value);
+    setQuantity(target.value);
+    if (target.value === 0) {
+      removeCartProduct();
+    } else {
+      updatedCartProducts(target.value);
+    }
+  };
 
   return (
     <div>
@@ -87,7 +94,6 @@ function Cards({ product, total }) {
       >
         -
       </button>
-      {total}
     </div>
   );
 }
@@ -99,7 +105,6 @@ Cards.propTypes = {
     url_image: PropTypes.string,
     id: PropTypes.number,
   }).isRequired,
-  total: PropTypes.number.isRequired,
 };
 
 export default Cards;
