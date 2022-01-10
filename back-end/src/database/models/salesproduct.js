@@ -1,12 +1,7 @@
-'use strict';
-
 module.exports = (sequelize, DataTypes) => {
-  const salesProduct = sequelize.define("salesProduct", {
-    quantity: DataTypes.INTEGER,
-  }, {
-    timestamps: false,
-  });
-
+  const salesProduct = sequelize.define('salesProduct', {
+    quantity: DataTypes.INTEGER }, { timestamps: false });
+  
   salesProduct.associate = (models) => {
     // a chave do objeto models deve ser a mesma definida como primeiro parâmetro do sequelize.define
     models.product.belongsToMany(models.sale, {
