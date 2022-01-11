@@ -5,6 +5,12 @@ const getAllSellers = async () => {
   return sellers;
 };
 
+const getSellerById = async (id) => {
+  const seller = await user.findByPk(id);
+  return seller;
+};
+
 module.exports = { 
   getAllSellers,
+  getSellerById,
 };
