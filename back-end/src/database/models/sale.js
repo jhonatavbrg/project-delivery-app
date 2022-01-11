@@ -8,10 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     delivery_number: DataTypes.STRING,
     status: DataTypes.STRING },
     {
-      timestamps: {
       createdAt: 'sale_date',
       updatedAt: false,
-    },
   });
   
   sale.associate = (models) => {
