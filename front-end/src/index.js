@@ -2,13 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import CustomerProvider from './context/customerProvider';
 // import './index.css';
 import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <CustomerProvider>
+        <App />
+      </CustomerProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
