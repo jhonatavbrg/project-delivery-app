@@ -1,7 +1,6 @@
-import React from 'react';
-// { useContext, useEffect, useState }
-// import CustomerContext from '../context/customerContext';
-// import { getSales, getSalesById } from '../services/orders';
+import React, { useEffect } from 'react';
+
+import { getSalesById } from '../services/orders';
 
 // import PropTypes from 'prop-types';
 
@@ -18,11 +17,13 @@ function OrderDetails() {
   //   },
   // ]);
 
-  // useEffect(() => {
-  //   const getSaleDetail = async () => {
-  //     const allProducts = await getProducts();
-  //   };
-  // });
+  useEffect(() => {
+    const getSaleDetail = async () => {
+      const allSales = await getSalesById(1);
+      console.log(allSales);
+    };
+    getSaleDetail();
+  });
 
   return (
     <div>
