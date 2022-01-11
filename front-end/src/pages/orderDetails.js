@@ -1,26 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react';
-import CustomerContext from '../context/customerContext';
-import { getSales, getSalesById } from '../services/orders';
+import React from 'react';
+// { useContext, useEffect, useState }
+// import CustomerContext from '../context/customerContext';
+// import { getSales, getSalesById } from '../services/orders';
 
 // import PropTypes from 'prop-types';
 
 function OrderDetails() {
   // fazer função para trazer o pedido de acordo com a venda
   const curstomerTestIds = 'customer_order_details__element-order-';
-  
-  const [saleDetail, setSaleDetail] = useState([
-    {
-      id: 0,
-      sellerName: '',
-      sale_date: '',
-      status: '',
-    }
-  ]);
 
-  useEffect(() => {
-    const getSaleDetail = async () => {
-      const allProducts = await getProducts();
-    };
+  // const [saleDetail, setSaleDetail] = useState([
+  //   {
+  //     id: 0,
+  //     sellerName: '',
+  //     sale_date: '',
+  //     status: '',
+  //   },
+  // ]);
+
+  // useEffect(() => {
+  //   const getSaleDetail = async () => {
+  //     const allProducts = await getProducts();
+  //   };
+  // });
+
   return (
     <div>
       <h3>Detalhes do Produto</h3>
@@ -68,7 +71,8 @@ function OrderDetails() {
           <td
             data-testid={ `${curstomerTestIds}table-sub-total-${index}` }
           >
-            Sub-total { /* será a multiplicação da quantidade pelo valor do produto */ }
+            Sub-total
+            { /* será a multiplicação da quantidade pelo valor do produto */ }
           </td>
           <td
             data-testid={ `${curstomerTestIds}total-price-${index}` }
