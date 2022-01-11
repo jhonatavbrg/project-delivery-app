@@ -20,7 +20,6 @@ function Orders() {
       {sales.map((sale, index) => (
         <CardsOrders sale={ sale } key={ index } />
       ))}
-      Essa é a Pagina de Orders
     </div>
   );
 }
