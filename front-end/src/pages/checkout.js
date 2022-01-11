@@ -35,7 +35,7 @@ function Checkout() {
       </ol>
       <form>
         <p>Detalhes e Endereço para Entrega</p>
-        <p>P. Vendedora responsável</p>
+        <p>P. Vendedora Responsável:</p>
         <label
           htmlFor="select-seller"
         >
@@ -48,10 +48,8 @@ function Checkout() {
             { sellers && sellers.map(({ id, name, email }) => (
               <option key={ email } id={ id } value={ id }>{ name }</option>
             ))}
-            ;
           </select>
         </label>
-        <p>Endereço</p>
         <label htmlFor="address">
           <input
             type="text"
@@ -60,6 +58,7 @@ function Checkout() {
             name="address"
             onChange={ getInformation }
           />
+          Endereço
         </label>
         <p>Número</p>
         <label htmlFor="number-address">

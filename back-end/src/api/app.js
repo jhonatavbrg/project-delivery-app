@@ -4,6 +4,7 @@ const loginRouter = require('./routes/login');
 const userRouter = require('./routes/user');
 const products = require('./routes/products');
 const images = require('./routes/images');
+const sales = require('./routes/sale');
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,8 @@ app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 
 app.use('/customer', products);
+
+app.use('/sales', sales);
 
 app.use('/images', images);
 
