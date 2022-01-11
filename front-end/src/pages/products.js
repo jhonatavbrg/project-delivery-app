@@ -8,7 +8,7 @@ import CustomerContext from '../context/customerContext';
 
 function Customer() {
   const navigate = useNavigate();
-  const { totalPrice, setTotalPrice, cartProducts } = useContext(CustomerContext);
+  const { totalPrice, cartProducts } = useContext(CustomerContext);
 
   const [products, setProducts] = useState([{
     name: '',
@@ -22,21 +22,12 @@ function Customer() {
       const allProducts = await getProducts();
       setProducts(allProducts);
     };
-    console.log(verifyToken());
     if (verifyToken()) {
       getAllProducts();
     } else {
       navigate('/login', { replace: true });
     }
   }, [navigate]);
-
-  useEffect(() => {
-    console.log(cartProducts);
-    const total = cartProducts.reduce(
-      (acc, { price, quantity }) => acc + (Number(price) * quantity), 0,
-    );
-    setTotalPrice(total.toFixed(2));
-  }, [cartProducts, setTotalPrice]);
 
   return (
     <div>

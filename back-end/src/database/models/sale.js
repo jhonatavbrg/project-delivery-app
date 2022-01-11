@@ -1,7 +1,5 @@
-'use strict';
-
 module.exports = (sequelize, DataTypes) => {
-  const sale = sequelize.define("sale", {
+  const sale = sequelize.define('sale', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -14,12 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     delivery_number: DataTypes.STRING,
     status: DataTypes.STRING,
   }, {
-    timestamps: {
       createdAt: 'sale_date',
       updatedAt: false,
-    },
   });
-  
+
   sale.associate = (models) => {
     sale.belongsTo(models.user, {
       foreignKey: 'user_id',
@@ -29,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'seller_id',
       as: 'seller',
     });
-  }
+  };
 
   return sale;
 };

@@ -12,7 +12,7 @@ function Cards({ product }) {
   function updatedCartProducts(cartQuantity) {
     const cartProduct = cartProducts.find(({ name }) => name === product.name);
     if (!cartProduct) {
-      setCartProducts([{ ...product, quantity: cartQuantity }, ...cartProducts]);
+      setCartProducts([...cartProducts, { ...product, quantity: cartQuantity }]);
     } else {
       const updatedProducts = cartProducts.map((updatedProduct) => {
         console.log(updatedProduct.name, product.name);
