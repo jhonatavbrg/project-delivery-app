@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function CardsOrders({ sale }) {
+  console.log(typeof sale.total_price);
   function convertDate(dateConvert) {
     const two = -2;
     const date = new Date(dateConvert);
@@ -27,7 +28,7 @@ function CardsOrders({ sale }) {
           {convertDate(sale.sale_date)}
         </p>
         <p data-testid={ `customer_orders__element-card-price-${sale.id}` }>
-          {sale.total_price}
+          {sale.total_price.replace('.', ',')}
         </p>
       </Link>
     </div>
