@@ -8,9 +8,13 @@ const getAllSellers = async () => {
 const getSellerById = async (id) => {
   const seller = await user.findByPk(id);
   return seller;
+const getUserByEmailAndName = async (name, email) => {
+  const usr = await user.findOne({ where: { name, email } });
+  return usr;
 };
 
 module.exports = { 
   getAllSellers,
   getSellerById,
+  getUserByEmailAndName,
 };

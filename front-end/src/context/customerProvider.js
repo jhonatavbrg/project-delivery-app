@@ -19,6 +19,18 @@ export default function CustomerProvider({ children }) {
   }
 
   useEffect(() => {
+    const total = cartProducts.reduce(
+      (acc, { price, quantity }) => acc + (Number(price) * quantity), 0,
+    );
+    setTotalPrice(total.toFixed(2));
+  }, [cartProducts, setTotalPrice]);
+
+  useEffect(() => {
+    const products = getCartProductsFromLS();
+    setCartProducts(products);
+  }, []);
+
+  useEffect(() => {
     saveCartProducts(cartProducts);
   }, [cartProducts]);
 
