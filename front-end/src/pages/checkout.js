@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import CustomerContext from '../context/customerContext';
 import { getSellers } from '../helpers/LS';
 import NavBar from '../componets/header';
@@ -11,7 +10,6 @@ function Checkout() {
   const [address, setAddress] = useState({ address: '', number: 0 });
   // const [productsArray, setProductsArray] = useState([]);
   const { cartProducts, totalPrice, setCartProducts } = useContext(CustomerContext);
-  const Navigate = useNavigate();
 
   useEffect(() => {
     getSellers()
@@ -154,15 +152,13 @@ function Checkout() {
             onChange={ getInformation }
           />
         </label>
-        <Navigate to={ `/customer/orders/${id}` }>
-          <button
-            type="button"
-            data-testid="customer_checkout__button-submit-order"
-            onClick={ () => finalizeSale() }
-          >
-            Finalizar pedido!
-          </button>
-        </Navigate>
+        <button
+          type="button"
+          data-testid="customer_checkout__button-submit-order"
+          onClick={ () => finalizeSale() }
+        >
+          Finalizar pedido!
+        </button>
       </form>
     </div>
   );
