@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define("User", {
+  const user = sequelize.define("user", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -10,22 +10,22 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    role: DataTypes.STRING,
+    role: { type: DataTypes.STRING, defaultValue: 'customer' }
   }, {
     timestamps: false,
   });
   
-  User.associate = (models) => {
-    User.hasMany(models.Sales, {
+  user.associate = (models) => {
+    user.hasMany(models.sale, {
       foreignKey: 'seller_id',
       as: 'sale',
     });
-    User.hasMany(models.Sales, {
+    user.hasMany(models.sale, {
       foreignKey: 'user_id',
-      as: 'sale',
+      as: 'user',
     });
   }
 
-  return User;
+  return user;
 };
 

@@ -1,14 +1,32 @@
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+// import '../App.css';
 import Joi from 'joi';
+import postLogin from '../services/login';
+import { setLSToken } from '../helpers/LS';
 
 function Login() {
   const [validate, setValidate] = useState(false);
+  const [loginError, setLoginError] = useState(false);
   const [payload, setPayload] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
 
   function onChange({ target }) {
     const { name, value } = target;
     setPayload({ ...payload, [name]: value });
+    console.log(setLoginError);
+  }
+
+  async function sendLogin() {
+    const token = await postLogin(payload);
+    console.log(token);
+    if (token.message) {
+      setLoginError(true);
+    } else {
+      setLoginError(false);
+      setLSToken(token);
+      navigate('/customer/products', { replace: true });
+    }
   }
 
   useEffect(() => {
@@ -54,17 +72,24 @@ function Login() {
           disabled={ validate }
           data-testid="common_login__button-login"
           type="button"
+          onClick={ sendLogin }
         >
           Login
         </button>
-        <button
-          data-testid="common_login__button-register"
-          type="button"
-        >
-          Ainda não tenho conta
-        </button>
+        <Link to="/register">
+          <button
+            type="button"
+            data-testid="common_login__button-register"
+          >
+            Ainda não tenho conta
+          </button>
+        </Link>
       </form>
-      { validate ? <p data-testid="common_login__element-invalid-email">Erro!</p> : null }
+      {
+        loginError
+          ? <p data-testid="common_login__element-invalid-email">Erro!</p>
+          : null
+      }
     </div>
   );
 }

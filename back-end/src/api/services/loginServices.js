@@ -1,14 +1,18 @@
 const md5 = require('md5');
 const { user } = require('../../database/models');
+const { createToken } = require('../middlewares/auth');
 
-const userLogin = async ({email, password}) => {
-  const loginUser = await user.findOne({ where: { email, password: md5(password)}});
-  if(loginUser){
-    jwt
+const login = async ({ email, password }) => {
+  const encodedPassword = md5(password);
+  const loginUser = await user.findOne({ where: { email, password: encodedPassword } });
+
+  if (loginUser) {
+    const token = createToken(loginUser);
+    const userInfo = { token, name: loginUser.name, email: loginUser.email, role: loginUser.role };
+    return userInfo;
   }
-  return loginUser;
-}
+};
 
 module.exports = { 
-  userLogin
-}
+  login,
+};
