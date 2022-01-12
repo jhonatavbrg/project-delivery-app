@@ -27,7 +27,7 @@ function CardsOrders({ sale }) {
           {convertDate(sale.sale_date)}
         </p>
         <p data-testid={ `customer_orders__element-card-price-${sale.id}` }>
-          {sale.total_price}
+          {sale.total_price.replace('.', ',')}
         </p>
       </Link>
     </div>

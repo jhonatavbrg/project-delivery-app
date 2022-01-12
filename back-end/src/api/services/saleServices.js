@@ -32,7 +32,7 @@ const createSaleProduct = async ({ productId, saleId, quantity }) => {
 const getAllSales = async () => sale.findAll();
 
 const findSaleById = async (id) => {
-  const saleById = await sale.findByPk(id);
+  const { dataValues: saleById } = await sale.findByPk(id);
   return saleById;
 };
 

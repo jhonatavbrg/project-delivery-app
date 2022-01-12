@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getSalesById } from '../services/orders';
-
-// import PropTypes from 'prop-types';
 
 function OrderDetails() {
   // fazer função para trazer o pedido de acordo com a venda
   const curstomerTestIds = 'customer_order_details__element-order-';
+  const { id } = useParams();
 
-  // const [saleDetail, setSaleDetail] = useState([
-  //   {
-  //     id: 0,
-  //     sellerName: '',
-  //     sale_date: '',
-  //     status: '',
-  //   },
-  // ]);
+  const [saleDetail, setSaleDetail] = useState(
+    {
+      id: 0,
+      sellerName: '',
+      sale_date: '',
+      status: '',
+      products: [{ id: 0 }],
+    },
+  );
 
   useEffect(() => {
     const getSaleDetail = async () => {
-      const allSales = await getSalesById(1);
-      console.log(allSales);
+      const sale = await getSalesById(id);
+      setSaleDetail(sale);
     };
     getSaleDetail();
   });
@@ -31,6 +31,7 @@ function OrderDetails() {
       <div>
         <p data-testid={ `${curstomerTestIds}details-label-order-id` }>
           Número do Pedido
+          {saleDetail.id}
         </p>
         <p data-testid={ `${curstomerTestIds}details-label-seller-name` }>
           Nome Vendedor
@@ -56,31 +57,32 @@ function OrderDetails() {
           <th>Valor Unitário</th>
           <th>Sub-total</th>
         </tr>
-        { /* fazer map para distribuir as infos do produto */ }
-        <tr>
-          <td data-testid={ `${curstomerTestIds}table-item-number-${index}` }>
-            item
-          </td>
-          <td data-testid={ `${curstomerTestIds}table-name-${index}` }>
-            Nome do Produto
-          </td>
-          <td
-            data-testid={ `${curstomerTestIds}table-quantity-${index}` }
-          >
-            Quantidade
-          </td>
-          <td
-            data-testid={ `${curstomerTestIds}table-sub-total-${index}` }
-          >
-            Sub-total
-            { /* será a multiplicação da quantidade pelo valor do produto */ }
-          </td>
-          <td
-            data-testid={ `${curstomerTestIds}total-price-${index}` }
-          >
-            Total
-          </td>
-        </tr>
+        { saleDetail.products.map((product, index) => (
+          <tr key={ product.id }>
+            <td data-testid={ `${curstomerTestIds}table-item-number-${index}` }>
+              item
+            </td>
+            <td data-testid={ `${curstomerTestIds}table-name-${index}` }>
+              Nome do Produto
+            </td>
+            <td
+              data-testid={ `${curstomerTestIds}table-quantity-${index}` }
+            >
+              Quantidade
+            </td>
+            <td
+              data-testid={ `${curstomerTestIds}table-sub-total-${index}` }
+            >
+              Sub-total
+              { /* será a multiplicação da quantidade pelo valor do produto */ }
+            </td>
+            <td
+              data-testid={ `${curstomerTestIds}total-price-${index}` }
+            >
+              Total
+            </td>
+          </tr>
+        )) }
       </table>
       <h2 data-testid={ `${curstomerTestIds}total-price` }>
         Total Price
