@@ -1,6 +1,6 @@
 const rescue = require('express-rescue');
 const { getSellerById } = require('../services/userServices');
-const {  getAllSales, findSaleById, createSale,
+const { getAllSales, findSaleById, createSale,
   createSaleProduct } = require('../services/saleServices');
 const { getSalesProductsBySaleId } = require('../services/salesProducts');
 
