@@ -7,6 +7,7 @@ import Customer from './pages/products';
 import Orders from './pages/orders';
 import OrderDetails from './pages/orderDetails';
 import SellerOrders from './pages/sellerOrders';
+import SellerOrderDetails from './pages/sellerOrdersDetails';
 // import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/customer/orders" element={ <Orders /> } />
         <Route path="/seller/orders" element={ <SellerOrders /> } />
         <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
+        <Route path="/seller/orders/:id" element={ <SellerOrderDetails /> } />
       </Routes>
     </div>
   );
