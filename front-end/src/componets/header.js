@@ -11,6 +11,15 @@ function NavBar() {
   };
   const clientName = getLSToken().name;
 
+  const redirectRole = () => {
+    const userRole = getLSToken().role;
+    if (userRole === 'seller') {
+      navigate('/selller/orders', { replace: true });
+    } else {
+      navigate('/customer/orders', { replace: true });
+    }
+  };
+
   return (
     <div className="header">
       <Link
@@ -19,16 +28,16 @@ function NavBar() {
       >
         Produtos
       </Link>
-      <Link
-        to="/customer/orders"
+      <button
+        type="button"
         data-testid="customer_products__element-navbar-link-orders"
+        onClick={ () => redirectRole() }
       >
         Meus pedidos
-      </Link>
+      </button>
       <button
         type="button"
         data-testid="customer_products__element-navbar-user-full-name"
-
       >
         {clientName}
       </button>
