@@ -1,8 +1,8 @@
-const express = require('express');
+const router = require('express').Router();
+const { verifyAuth } = require('../middlewares/auth');
+const { getSales, salesById, postSale } = require('../controllers/saleController');
 
-const router = express.Router();
-
-const { getSales, salesById } = require('../controllers/saleController');
+router.post('/', verifyAuth, postSale);
 
 router.get('/', getSales);
 

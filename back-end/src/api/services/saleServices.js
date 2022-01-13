@@ -27,9 +27,18 @@ const createSaleProduct = async ({ productId, saleId, quantity }) => {
     [productid]: productId,
     quantity,
     [saleid]: saleId });
-}; 
+};
+
+const getAllSales = async () => sale.findAll();
+
+const findSaleById = async (id) => {
+  const { dataValues: saleById } = await sale.findByPk(id);
+  return saleById;
+};
 
 module.exports = {
+  getAllSales,
+  findSaleById,
   createSale,
   createSaleProduct,
 };

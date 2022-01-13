@@ -20,7 +20,7 @@ function NavBar() {
         Produtos
       </Link>
       <Link
-        to="/customer/orders/:id"
+        to="/customer/orders"
         data-testid="customer_products__element-navbar-link-orders"
       >
         Meus pedidos

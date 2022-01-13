@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 // import '../App.css';
 import Joi from 'joi';
+import verifyToken from '../helpers/auth';
 import postLogin from '../services/login';
 import { setLSToken } from '../helpers/LS';
 
@@ -14,12 +15,10 @@ function Login() {
   function onChange({ target }) {
     const { name, value } = target;
     setPayload({ ...payload, [name]: value });
-    console.log(setLoginError);
   }
 
   async function sendLogin() {
     const token = await postLogin(payload);
-    console.log(token);
     if (token.message) {
       setLoginError(true);
     } else {
@@ -44,6 +43,12 @@ function Login() {
     };
     validateLogin();
   }, [payload]);
+
+  useEffect(() => {
+    if (verifyToken()) {
+      navigate('/customer/products', { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <div className="App">

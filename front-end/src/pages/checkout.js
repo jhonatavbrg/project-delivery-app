@@ -34,13 +34,11 @@ function Checkout() {
   };
 
   const finalizeSale = async () => {
-    console.log('finalizedSale');
     const saleId = await postSale({
       sales: cartProducts,
       seller: sellerSelected,
       address });
     localStorage.removeItem('cartProducts');
-    console.log(saleId);
     navigate(`/customer/orders/${saleId}`, { replace: true });
   };
 
