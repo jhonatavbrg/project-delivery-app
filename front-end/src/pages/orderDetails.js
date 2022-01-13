@@ -13,17 +13,29 @@ function OrderDetails() {
       sellerName: '',
       sale_date: '',
       status: '',
-      products: [{ id: 0 }],
+      products: [{ id: 0, productPrice: '0', quantity: 0 }],
+      total_price: '0',
     },
   );
 
   useEffect(() => {
     const getSaleDetail = async () => {
       const sale = await getSalesById(id);
+      console.log(sale);
       setSaleDetail(sale);
     };
     getSaleDetail();
-  });
+  }, [setSaleDetail, id]);
+
+  function convertDate(dateConvert) {
+    const two = -2;
+    const date = new Date(dateConvert);
+    const getMonth = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const month = `0${getMonth}`.slice(two);
+    const day = date.getDate();
+    return `${day}/${month}/${year}`;
+  }
 
   return (
     <div>
@@ -34,17 +46,18 @@ function OrderDetails() {
           {saleDetail.id}
         </p>
         <p data-testid={ `${curstomerTestIds}details-label-seller-name` }>
-          Nome Vendedor
+          {saleDetail.sellerName}
         </p>
         <p data-testid={ `${curstomerTestIds}details-label-order-date` }>
-          Data do Pedido
+          {convertDate(saleDetail.sale_date)}
         </p>
         <p data-testid={ `${curstomerTestIds}details-label-delivery-status` }>
-          Status do Pedido
+          {saleDetail.status}
         </p>
         <button
           type="button"
           data-testid="customer_order_details__button-delivery-check"
+          disabled
         >
           Marcar como entregue
         </button>
@@ -58,34 +71,36 @@ function OrderDetails() {
           <th>Sub-total</th>
         </tr>
         { saleDetail.products.map((product, index) => (
-          <tr key={ product.id }>
+          <tr key={ product.productId }>
             <td data-testid={ `${curstomerTestIds}table-item-number-${index}` }>
-              item
+              {index + 1}
             </td>
             <td data-testid={ `${curstomerTestIds}table-name-${index}` }>
-              Nome do Produto
+              {product.productName}
             </td>
             <td
               data-testid={ `${curstomerTestIds}table-quantity-${index}` }
             >
-              Quantidade
+              {product.quantity}
             </td>
             <td
               data-testid={ `${curstomerTestIds}table-sub-total-${index}` }
             >
-              Sub-total
-              { /* será a multiplicação da quantidade pelo valor do produto */ }
+              {product.productPrice.replace('.', ',')}
             </td>
             <td
               data-testid={ `${curstomerTestIds}total-price-${index}` }
             >
-              Total
+              {
+                (Number(product.productPrice) * product.quantity)
+                  .toFixed(2).toString().replace('.', ',')
+              }
             </td>
           </tr>
         )) }
       </table>
       <h2 data-testid={ `${curstomerTestIds}total-price` }>
-        Total Price
+        {saleDetail.total_price.toString().replace('.', ',')}
       </h2>
     </div>
   );
