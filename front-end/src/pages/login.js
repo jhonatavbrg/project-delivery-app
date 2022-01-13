@@ -15,12 +15,10 @@ function Login() {
   function onChange({ target }) {
     const { name, value } = target;
     setPayload({ ...payload, [name]: value });
-    console.log(setLoginError);
   }
 
   async function sendLogin() {
     const token = await postLogin(payload);
-    console.log(token);
     if (token.message) {
       return setLoginError(true);
     }
@@ -48,6 +46,8 @@ function Login() {
     validateLogin();
   }, [payload]);
 
+  const token = async () => postLogin(payload);
+
   useEffect(() => {
     if (verifyToken() && token.rolle === 'seller') {
       return navigate('/seller/orders', { replace: true });
@@ -55,7 +55,7 @@ function Login() {
     if (verifyToken() && token.rolle === 'customer') {
       return navigate('/customer/products', { replace: true });
     }
-  }, [navigate]);
+  }, [navigate, token.rolle]);
 
   return (
     <div className="App">

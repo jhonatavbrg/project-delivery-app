@@ -20,8 +20,8 @@ function App() {
         <Route path="/customer/products" element={ <Customer /> } />
         <Route path="/customer/checkout" element={ <Checkout /> } />
         <Route path="/customer/orders" element={ <Orders /> } />
-        <Route path="/customer/order/:id" element={ <OrderDetails /> } />
         <Route path="/seller/orders" element={ <SellerOrders /> } />
+        <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
       </Routes>
     </div>
   );

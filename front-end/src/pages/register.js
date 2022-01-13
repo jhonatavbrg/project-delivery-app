@@ -33,7 +33,6 @@ function Register() {
 
       if (error) {
         setValidate(true);
-        console.log(error);
       } else {
         setValidate(false);
       }
@@ -52,7 +51,6 @@ function Register() {
 
   async function sendRegister() {
     const message = await postRegister(register);
-    console.log(message);
     if (message === 'Usuário criado com sucesso!') {
       setRegisterError(false);
       const token = await postLogin(register);
