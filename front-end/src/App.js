@@ -6,7 +6,8 @@ import Checkout from './pages/checkout';
 import Customer from './pages/products';
 import Orders from './pages/orders';
 import OrderDetails from './pages/orderDetails';
-import SellerOrders from './pages/sellerOrders';
+import Admin from './pages/admin';
+// import SellerOrders from './pages/sellerOrders';
 // import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 
@@ -20,8 +21,8 @@ function App() {
         <Route path="/customer/products" element={ <Customer /> } />
         <Route path="/customer/checkout" element={ <Checkout /> } />
         <Route path="/customer/orders" element={ <Orders /> } />
-        <Route path="/customer/order/:id" element={ <OrderDetails /> } />
-        <Route path="/seller/orders" element={ <SellerOrders /> } />
+        <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
+        <Route path="/admin/manage" element={ <Admin /> } />
       </Routes>
     </div>
   );

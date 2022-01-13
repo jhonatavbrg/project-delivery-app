@@ -15,12 +15,10 @@ function Login() {
   function onChange({ target }) {
     const { name, value } = target;
     setPayload({ ...payload, [name]: value });
-    console.log(setLoginError);
   }
 
   async function sendLogin() {
     const token = await postLogin(payload);
-    console.log(token);
     if (token.message) {
       setLoginError(true);
     } else {

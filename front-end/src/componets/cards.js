@@ -15,7 +15,6 @@ function Cards({ product }) {
       setCartProducts([...cartProducts, { ...product, quantity: cartQuantity }]);
     } else {
       const updatedProducts = cartProducts.map((updatedProduct) => {
-        console.log(updatedProduct.name, product.name);
         if (updatedProduct.name === product.name) {
           return { ...updatedProduct, quantity: cartQuantity };
         }
@@ -47,7 +46,6 @@ function Cards({ product }) {
   };
 
   const handleChange = ({ target }) => {
-    console.log(typeof target.value);
     setQuantity(target.value);
     if (target.value === 0) {
       removeCartProduct();
