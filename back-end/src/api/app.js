@@ -5,11 +5,11 @@ const userRouter = require('./routes/user');
 const products = require('./routes/products');
 const images = require('./routes/images');
 const sales = require('./routes/sale');
+const registerRouter = require('./routes/register');
 
 const app = express();
 app.use(cors());
 
-const registerRouter = require('./routes/register');
 
 app.use(express.json());
 

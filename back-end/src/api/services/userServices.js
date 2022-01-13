@@ -15,8 +15,20 @@ const getUserByEmailAndName = async (name, email) => {
   return usr;
 };
 
+const getAllUsers = async () => {
+  const Allusers = await user.findAll();
+  return Allusers;
+}
+
+const deleteUser = async (id) => {
+  const deletedUser = await user.destroy({ where: { id }});
+  return deletedUser;
+}
+
 module.exports = { 
   getAllSellers,
   getSellerById,
   getUserByEmailAndName,
+  getAllUsers,
+  deleteUser,
 };

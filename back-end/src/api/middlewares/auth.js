@@ -4,7 +4,6 @@ const fs = require('fs');
 const userServices = require('../services/userServices');
 
 const SECRET_KEY = fs.readFileSync(path.join('jwt.evaluation.key'), 'utf-8').trim();
-console.log(SECRET_KEY);
 
 const createToken = (user) => {
   const token = jwt.sign({
@@ -41,4 +40,5 @@ module.exports = {
   createToken,
   verifyToken,
   verifyAuth,
+  SECRET_KEY
 };
