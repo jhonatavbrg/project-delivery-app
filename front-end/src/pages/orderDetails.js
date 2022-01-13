@@ -24,7 +24,12 @@ function OrderDetails() {
       console.log(sale);
       setSaleDetail(sale);
     };
+
     getSaleDetail();
+    const socket = socketClient('http://localhost:3002');
+    socket.on('updateStatus', () => {
+      getSaleDetail();
+    });
   }, [setSaleDetail, id]);
 
   function convertDate(dateConvert) {
