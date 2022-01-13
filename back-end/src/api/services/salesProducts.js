@@ -1,7 +1,9 @@
 const { salesProduct, product } = require('../../database/models');
 
+const SALE_ID = 'sale_id';
+
 const getSalesProductsBySaleId = async (saleId) => {
-  const sales = await salesProduct.findAll({ where: { sale_id: saleId } });
+  const sales = await salesProduct.findAll({ where: { [SALE_ID]: saleId } });
   const newListProducts = [];
   await Promise.all(sales.map(async ({ product_id: productId, quantity }) => {
     const products = await product.findByPk(productId);
