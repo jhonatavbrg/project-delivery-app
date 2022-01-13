@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function CardsOrders({ sale }) {
+  console.log(typeof sale.total_price);
   function convertDate(dateConvert) {
     const two = -2;
     const date = new Date(dateConvert);
