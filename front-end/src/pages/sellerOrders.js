@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from '../componets/header';
+import HeaderSeller from '../componets/headerSeller';
 import CardsOrdersSeller from '../componets/cardsOrdersSeller';
 import { getSales } from '../services/orders';
 
@@ -16,7 +16,7 @@ function SellerOrders() {
 
   return (
     <div>
-      <NavBar />
+      <HeaderSeller />
       {sales.map((sale, index) => (
         <CardsOrdersSeller sale={ sale } key={ index } />
       ))}

@@ -22,12 +22,14 @@ function Login() {
     const token = await postLogin(payload);
     console.log(token);
     if (token.message) {
-      setLoginError(true);
-    } else {
-      setLoginError(false);
-      setLSToken(token);
-      navigate('/customer/products', { replace: true });
+      return setLoginError(true);
     }
+    setLoginError(false);
+    setLSToken(token);
+    if (token.role === 'seller') {
+      return navigate('/seller/orders', { replace: true });
+    }
+    navigate('/customer/products', { replace: true });
   }
 
   useEffect(() => {
@@ -47,8 +49,11 @@ function Login() {
   }, [payload]);
 
   useEffect(() => {
-    if (verifyToken()) {
-      navigate('/customer/products', { replace: true });
+    if (verifyToken() && token.rolle === 'seller') {
+      return navigate('/seller/orders', { replace: true });
+    }
+    if (verifyToken() && token.rolle === 'customer') {
+      return navigate('/customer/products', { replace: true });
     }
   }, [navigate]);
 
