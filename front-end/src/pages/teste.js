@@ -5,7 +5,7 @@ function Teste() {
   const [string, setString] = useState('');
 
   useEffect(() => {
-    const socket = socketClient('http://localhost:3001/');
+    const socket = socketClient('http://localhost:3002');
     socket.on('teste', (value) => setString(value));
   }, []);
 
