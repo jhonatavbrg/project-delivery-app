@@ -1,8 +1,5 @@
-'use strict';
-
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('sales',
+  up: async (queryInterface, Sequelize) => queryInterface.bulkInsert('sales',
     [
       {
         id: 1,
@@ -14,10 +11,6 @@ module.exports = {
         status: 'vendido',
       },
     ],
-    {},
-    );
-  },
-  down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('sales', null, {});
-  },
+    {}),
+  down: async (queryInterface, Sequelize) => queryInterface.bulkDelete('sales', null, {}),
 };

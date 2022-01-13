@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../componets/header';
-import OrderDetails from '../componets/orderDetails';
+import CardsOrders from '../componets/cardsOrders';
+import getSales from '../services/orders';
 
 function Orders() {
+  const [sales, setSales] = useState([]);
+
+  useEffect(() => {
+    const getAllSales = async () => {
+      const allSales = await getSales();
+      setSales(allSales);
+    };
+    getAllSales();
+  }, []);
+
   return (
     <div>
       <NavBar />
-      <OrderDetails />
+      {sales.map((sale, index) => (
+        <CardsOrders sale={ sale } key={ index } />
+      ))}
     </div>
   );
 }

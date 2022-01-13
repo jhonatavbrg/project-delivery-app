@@ -61,3 +61,7 @@
   flex-direction: row;
   border: black solid;
   /* background-color: black; */
+
+img {
+  width: 1px;
+}
