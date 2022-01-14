@@ -14,7 +14,7 @@ function NavBar() {
   const redirectRole = () => {
     const userRole = getLSToken().role;
     if (userRole === 'seller') {
-      navigate('/selller/orders', { replace: true });
+      navigate('/seller/orders', { replace: true });
     } else {
       navigate('/customer/orders', { replace: true });
     }

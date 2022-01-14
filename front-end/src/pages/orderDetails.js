@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import socketClient from 'socket.io-client';
-import { getSalesById } from '../services/orders';
+import { getSalesById, changeStatusDB } from '../services/orders';
 import NavBar from '../componets/header';
 
 function OrderDetails() {
+  const socket = socketClient('http://localhost:3002');
   // fazer função para trazer o pedido de acordo com a venda
   const curstomerTestIds = 'customer_order_details__element-order-';
   const { id } = useParams();
@@ -28,12 +29,17 @@ function OrderDetails() {
     };
 
     getSaleDetail();
-    const socket = socketClient('http://localhost:3002');
-    socket.on('updateStatus', () => {
+    socket.on('updateStatus', async () => {
       getSaleDetail();
     });
     return () => socket.disconnect();
   }, [setSaleDetail, id]);
+
+  const changeStatus = async ({ target }) => {
+    const status = target.name;
+    await changeStatusDB(status, saleDetail.id);
+    socket.emit('updateStatus', { status, saleId: saleDetail.id });
+  };
 
   function convertDate(dateConvert) {
     const two = -2;
@@ -65,8 +71,10 @@ function OrderDetails() {
         </p>
         <button
           type="button"
+          name="Entregue"
           data-testid="customer_order_details__button-delivery-check"
           disabled={ saleDetail.status !== 'Em Trânsito' }
+          onClick={ (e) => changeStatus(e) }
         >
           Marcar como entregue
         </button>
