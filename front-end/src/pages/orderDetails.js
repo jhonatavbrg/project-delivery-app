@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import socketClient from 'socket.io-client';
 import { getSalesById } from '../services/orders';
 import NavBar from '../componets/header';
 

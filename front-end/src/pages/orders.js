@@ -9,6 +9,7 @@ function Orders() {
   useEffect(() => {
     const getAllSales = async () => {
       const allSales = await getSales();
+      console.log(allSales);
       setSales(allSales);
     };
     getAllSales();
