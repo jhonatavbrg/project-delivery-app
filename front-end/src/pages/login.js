@@ -46,16 +46,14 @@ function Login() {
     validateLogin();
   }, [payload]);
 
-  const token = async () => postLogin(payload);
-
   useEffect(() => {
-    if (verifyToken() && token.rolle === 'seller') {
+    if (verifyToken('seller')) {
       return navigate('/seller/orders', { replace: true });
     }
-    if (verifyToken() && token.rolle === 'customer') {
+    if (verifyToken('customer')) {
       return navigate('/customer/products', { replace: true });
     }
-  }, [navigate, token.rolle]);
+  }, [navigate]);
 
   return (
     <div className="App">
