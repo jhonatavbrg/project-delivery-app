@@ -4,6 +4,7 @@ const loginRouter = require('./routes/login');
 const userRouter = require('./routes/user');
 const products = require('./routes/products');
 const sales = require('./routes/sale');
+const images = require('./routes/images');
 const socketServer = require('./sockets/socketServer');
 
 const app = express();
@@ -12,6 +13,8 @@ app.use(cors());
 const registerRouter = require('./routes/register');
 
 app.use(express.json());
+
+app.use(express.static(`${__dirname}/../public/images`)); 
 
 app.use('/register', registerRouter);
 
@@ -22,6 +25,8 @@ app.use('/customer', products);
 app.use('/sales', sales);
 
 app.use('/user', userRouter);
+
+app.use('/images', images);
 
 app.get('/', (_req, res) => res.status(200).end());
 
