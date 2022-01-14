@@ -14,8 +14,8 @@ function NavBar() {
   return (
     <div className="header">
       <Link
-        to="/customer/products"
-        data-testid="customer_products__element-navbar-link-products"
+        to="/seller/orders"
+        data-testid="customer_products__element-navbar-link-orders"
       >
         Pedidos
       </Link>

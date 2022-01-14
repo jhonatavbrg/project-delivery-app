@@ -27,6 +27,9 @@ function Login() {
     if (token.role === 'seller') {
       return navigate('/seller/orders', { replace: true });
     }
+    if (token.role === 'administrator') {
+      return navigate('/admin/manage', { replace: true });
+    }
     navigate('/customer/products', { replace: true });
   }
 
@@ -47,6 +50,9 @@ function Login() {
   }, [payload]);
 
   useEffect(() => {
+    if (verifyToken('administrator')) {
+      return navigate('/admin/manage', { replace: true });
+    }
     if (verifyToken('seller')) {
       return navigate('/seller/orders', { replace: true });
     }

@@ -6,11 +6,10 @@ const products = require('./routes/products');
 const sales = require('./routes/sale');
 const images = require('./routes/images');
 const socketServer = require('./sockets/socketServer');
+const registerRouter = require('./routes/register');
 
 const app = express();
 app.use(cors());
-
-const registerRouter = require('./routes/register');
 
 app.use(express.json());
 

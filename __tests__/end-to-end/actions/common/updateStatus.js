@@ -17,7 +17,6 @@ const validateCOD = async ({COD, SOD, situation, status, deliveryBtnDisabled, cu
         customerOrderDetailsPage.element.orderDetails.label.deliveryStatus,
         status
       );
-    
       await expect(COD).toFindElement(
         customerOrderDetailsPage.button.deliveryCheck[deliveryBtnDisabled]
       );

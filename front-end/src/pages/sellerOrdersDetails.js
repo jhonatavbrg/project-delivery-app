@@ -43,7 +43,7 @@ function SellerOrderDetails() {
       getSaleDetail();
     });
     return () => socket.disconnect();
-  }, [setSaleDetail, id, socket]);
+  }, [setSaleDetail, id]);
 
   function convertDate(dateConvert) {
     const two = -2;
