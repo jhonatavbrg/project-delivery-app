@@ -2,8 +2,8 @@ const { Op } = require('sequelize');
 const rescue = require('express-rescue');
 const { user } = require('../../database/models');
 const { userRegister, userRegisterADM } = require('../services/registerServices');
-const { SECRET_KEY } = require('../middlewares/validators');
-const { verifyToken } = require('../middlewares/auth');
+// const { SECRET_KEY } = require('../middlewares/validators');
+// const { verifyToken } = require('../middlewares/auth');
 
 const register = rescue(async (req, res) => {
   const { name, email, password, role } = req.body;
@@ -20,13 +20,12 @@ const register = rescue(async (req, res) => {
 const registerADM = rescue(async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
-    const { user } = req; 
-
+    const userReq = req.user; 
     const checkUser = await user.findOne({ where: { [Op.or]: [{ name }, { email }] } });
 
     if (checkUser) return res.status(409).json({ message: 'Usuário já existe.' });
 
-    if (user.role === 'administrator') {
+    if (userReq.role === 'administrator') {
         const newUserADM = await userRegisterADM({ name, email, password, role });
         return res.status(201).json(newUserADM);
     }
