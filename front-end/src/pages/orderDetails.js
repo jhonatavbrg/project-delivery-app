@@ -73,7 +73,7 @@ function OrderDetails() {
           type="button"
           name="Entregue"
           data-testid="customer_order_details__button-delivery-check"
-          disabled={ saleDetail.status !== 'Em Trânsito' }
+          disabled={ saleDetail.status !== 'Entregue' }
           onClick={ (e) => changeStatus(e) }
         >
           Marcar como entregue
