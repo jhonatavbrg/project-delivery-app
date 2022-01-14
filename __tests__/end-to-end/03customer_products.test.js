@@ -129,8 +129,9 @@ describe(requirement(14), () => {
             `[src='${urlImage}']`
         );
 
+        
         const validateImage = await axios
-          .get(urlImage, {
+        .get(urlImage, {
             Headers: {
               "Content-Type": "image/jpeg",
             },

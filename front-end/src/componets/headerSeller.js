@@ -9,16 +9,7 @@ function NavBar() {
     localStorage.clear();
     navigate('/login', { replace: true });
   };
-  const clientName = getLSToken().name;
-
-  const redirectRole = () => {
-    const userRole = getLSToken().role;
-    if (userRole === 'seller') {
-      navigate('/selller/orders', { replace: true });
-    } else {
-      navigate('/customer/orders', { replace: true });
-    }
-  };
+  const sellerName = getLSToken().name;
 
   return (
     <div className="header">
@@ -26,27 +17,20 @@ function NavBar() {
         to="/customer/products"
         data-testid="customer_products__element-navbar-link-products"
       >
-        Produtos
+        Pedidos
       </Link>
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-orders"
-        onClick={ () => redirectRole() }
-      >
-        Meus pedidos
-      </button>
       <button
         type="button"
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        {clientName}
+        {sellerName}
       </button>
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-logout"
         onClick={ logout }
       >
-        sair
+        Sair
       </button>
     </div>
   );

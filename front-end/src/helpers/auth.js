@@ -3,7 +3,7 @@ import { getLSToken } from './LS';
 
 const SECRET_KEY = 'secret_key';
 
-export default function verifyToken() {
+export default function verifyToken(roleToVerify) {
   const user = getLSToken();
   let decoded;
   try {
@@ -13,7 +13,11 @@ export default function verifyToken() {
   }
   if (typeof decoded !== 'undefined'
     && decoded.name === user.name
-    && decoded.role === user.role) {
+    && decoded.role === user.role
+  ) {
+    if (roleToVerify) {
+      return decoded.role === roleToVerify;
+    }
     return true;
   }
   return false;

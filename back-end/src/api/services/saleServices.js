@@ -36,9 +36,12 @@ const findSaleById = async (id) => {
   return saleById;
 };
 
+const changeStatus = ({ status, id }) => sale.update({ status }, { where: { id } });
+
 module.exports = {
   getAllSales,
   findSaleById,
   createSale,
   createSaleProduct,
+  changeStatus,
 };

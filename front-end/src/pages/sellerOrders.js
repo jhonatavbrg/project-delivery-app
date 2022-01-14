@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import NavBar from '../componets/header';
-import CardsOrders from '../componets/cardsOrders';
+import React, { useState, useEffect } from 'react';
+import HeaderSeller from '../componets/headerSeller';
+import CardsOrdersSeller from '../componets/cardsOrdersSeller';
 import { getSales } from '../services/orders';
 
-function Orders() {
+function SellerOrders() {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
     const getAllSales = async () => {
       const allSales = await getSales();
-      console.log(allSales);
       setSales(allSales);
     };
     getAllSales();
@@ -17,12 +16,12 @@ function Orders() {
 
   return (
     <div>
-      <NavBar />
+      <HeaderSeller />
       {sales.map((sale, index) => (
-        <CardsOrders sale={ sale } key={ index } />
+        <CardsOrdersSeller sale={ sale } key={ index } />
       ))}
     </div>
   );
 }
 
-export default Orders;
+export default SellerOrders;

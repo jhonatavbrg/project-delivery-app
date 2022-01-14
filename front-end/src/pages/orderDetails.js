@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import socketClient from 'socket.io-client';
 import { getSalesById } from '../services/orders';
+import NavBar from '../componets/header';
 
 function OrderDetails() {
   // fazer função para trazer o pedido de acordo com a venda
@@ -24,7 +26,13 @@ function OrderDetails() {
       console.log(sale);
       setSaleDetail(sale);
     };
+
     getSaleDetail();
+    const socket = socketClient('http://localhost:3002');
+    socket.on('updateStatus', () => {
+      getSaleDetail();
+    });
+    return () => socket.disconnect();
   }, [setSaleDetail, id]);
 
   function convertDate(dateConvert) {
@@ -39,6 +47,7 @@ function OrderDetails() {
 
   return (
     <div>
+      <NavBar />
       <h3>Detalhes do Produto</h3>
       <div>
         <p data-testid={ `${curstomerTestIds}details-label-order-id` }>
