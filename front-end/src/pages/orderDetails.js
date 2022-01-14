@@ -32,6 +32,7 @@ function OrderDetails() {
     socket.on('updateStatus', () => {
       getSaleDetail();
     });
+    return () => socket.disconnect();
   }, [setSaleDetail, id]);
 
   function convertDate(dateConvert) {

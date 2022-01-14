@@ -16,7 +16,14 @@ export async function getSalesById(id) {
     .catch((err) => err.toJSON());
 }
 
+export async function changeStatusDB(status, saleId) {
+  return axios.patch(`http://localhost:3001/sales/${saleId}`, { status })
+    .then(({ data }) => data)
+    .catch((err) => err.toJSON());
+}
+
 export default {
   getSales,
   getSalesById,
+  changeStatusDB,
 };

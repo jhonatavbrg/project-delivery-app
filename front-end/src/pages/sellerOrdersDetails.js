@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSalesById } from '../services/orders';
+import socketClient from 'socket.io-client';
+import { getSalesById, changeStatusDB } from '../services/orders';
 import NavBar from '../componets/headerSeller';
 
 function SellerOrderDetails() {
   // fazer função para trazer o pedido de acordo com a venda
   // const curstomerTestIds = 'customer_order_details__element-order-';
   const { id } = useParams();
-
+  const socket = socketClient('http://localhost:3002');
   const [saleDetail, setSaleDetail] = useState(
     {
       id: 0,
@@ -18,16 +19,31 @@ function SellerOrderDetails() {
       total_price: '0',
     },
   );
-  const [buttonStatus, setButtonStatus] = useState(0);
+  const [buttonStatus, setButtonStatus] = useState();
 
   useEffect(() => {
     const getSaleDetail = async () => {
       const sale = await getSalesById(id);
-      console.log(sale);
+      switch (sale.status) {
+      case 'Pendente':
+        setButtonStatus(0);
+        break;
+      case 'Preparando':
+        setButtonStatus(1);
+        break;
+      default:
+        setButtonStatus(2);
+        break;
+      }
       setSaleDetail(sale);
     };
+
     getSaleDetail();
-  }, [setSaleDetail, id]);
+    socket.on('updateStatus', () => {
+      getSaleDetail();
+    });
+    return () => socket.disconnect();
+  }, [setSaleDetail, id, socket]);
 
   function convertDate(dateConvert) {
     const two = -2;
@@ -39,10 +55,11 @@ function SellerOrderDetails() {
     return `${day}/${month}/${year}`;
   }
   const changeStatus = async ({ target }) => {
-    // const status = target.name;
-    // await changeStatusDB(status, saleDetail.id);
+    const status = target.name;
+    await changeStatusDB(status, saleDetail.id);
     console.log(target);
     setButtonStatus(buttonStatus + 1);
+    socket.emit('updateStatus', { status, saleId: saleDetail.id });
   };
 
   return (
