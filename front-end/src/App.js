@@ -8,6 +8,8 @@ import Orders from './pages/orders';
 import OrderDetails from './pages/orderDetails';
 import SellerOrders from './pages/sellerOrders';
 import SellerOrderDetails from './pages/sellerOrdersDetails';
+import Admin from './pages/admin';
+// import SellerOrders from './pages/sellerOrders';
 // import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 
@@ -24,6 +26,7 @@ function App() {
         <Route path="/seller/orders" element={ <SellerOrders /> } />
         <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
         <Route path="/seller/orders/:id" element={ <SellerOrderDetails /> } />
+        <Route path="/admin/manage" element={ <Admin /> } />
       </Routes>
     </div>
   );

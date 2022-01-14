@@ -40,4 +40,5 @@ module.exports = {
   createToken,
   verifyToken,
   verifyAuth,
+  SECRET_KEY,
 };

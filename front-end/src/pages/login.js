@@ -53,6 +53,9 @@ function Login() {
     if (verifyToken('customer')) {
       return navigate('/customer/products', { replace: true });
     }
+    if (verifyToken('administrator')) {
+      return navigate('/admin/manage', { replace: true });
+    }
   }, [navigate]);
 
   return (
